@@ -1,10 +1,24 @@
 import psycopg2
 
 class Usuario: 
-    def __init__(self,login,senha):
+    def __init__(self,login,senha,codigo):
         self.login = login
         self.senha = senha
+        self.codigo = codigo
 
+def insertUser(Usuario):
+    # insert an user to the DB
+          with psycopg2.connect(
+            host="localhost",
+            dbname="db1",
+            user="root",
+            password="root"
+        ) as conexao:
+
+            with conexao.cursor() as cursor:
+                cursor.execute('INSERT INTO tb_usuario (cod_usuario,login,senha) VALUES(Usuario.codigo,Usuario.login,Usuario.senha)'      
+            )
+    
 def existe(usuario):
       # abrir uma conexão com o postgres
       with psycopg2.connect(
